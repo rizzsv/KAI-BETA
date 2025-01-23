@@ -1,0 +1,1626 @@
+{
+	"info": {
+		"_postman_id": "6281695b-8e55-4217-ac02-db498ab546a3",
+		"name": "UKK - Kereta Api 2025",
+		"description": "Berkas ini merupakan dokumentasi penggunaan REST API pada Project UKK dengan tema \"Tiket Kereta Api\". Sebelum menggunakan REST API ini Anda perlu menerapkan langkah-langkah berikut.\n\nMelakukan registrasi pada **APP USERS** dengan menjalankan request pada Folder \"**APP USERS**\" -> \"**Register App User**\".\n\n<img src=\"https://content.pstmn.io/c8a931c2-e156-4b98-a2d4-162e7cd72fcc/U2NyZWVuc2hvdCAyMDI1LTAxLTE1IGF0IDE0LjU4LjAzLnBuZw==\" alt=\"Tampilan%20Registrasi%20App%20Users\">\n\nSetelah melakukan klik Send Button maka akan mendapat kode token seperti berikut.\n\n<img src=\"https://content.pstmn.io/d4a8274d-94b8-49a8-b02e-3a89a7f1fae6/U2NyZWVuc2hvdCAyMDI1LTAxLTE1IGF0IDE1LjA2LjUzLnBuZw==\" alt=\"Tampilan%20Response%20Registrasi%20App%20User\">\n\nKemudian gunakan kode token tersebut untuk mengakses tiap request API yang disediakan dengan menyisipkan pada bagian **Headers** dan menambahkan Key **APP-KEY** serta masukkan kode token tersebut pada bagian Value-nya.\n\n<img src=\"https://content.pstmn.io/dbf49b02-315a-4ad1-94da-1c6f34f0e74e/U2NyZWVuc2hvdCAyMDI1LTAxLTE1IGF0IDE1LjI1LjEzLnBuZw==\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30555113"
+	},
+	"item": [
+		{
+			"name": "APP USERS",
+			"item": [
+				{
+					"name": "Register App User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"your-email@smktelkom-mlg.sch.id\",\n    \"password\": \"your-password\",\n    \"name\": \"Your Name\",\n    \"grade\": \"your class\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/app-user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"app-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login App User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"your-email@smktelkom-mlg.sch.id\",\n    \"password\": \"your-password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/app-user/auth",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"app-user",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API pada folder ini digunakan untuk mengidentifikasi pengguna yang akan consume Restful API pada project ini. Pengguna perlu register dan otentikasi untuk mendapatkan kode \"APP-KEY\" yang digunakan untuk mengakses setiap API pada project ini."
+		},
+		{
+			"name": "PELANGGAN",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "app-key",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"pelanggan-10\",\n    \"password\":\"pelanggan-10\",\n    \"nik\":\"12345678\",\n    \"name\":\"Pelanggan Sepuluh\",\n    \"address\":\"Milan 111, Italia\",\n    \"phone\":\"021 34343-232\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/customer/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customer",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2NzQ2MTA3LCJleHAiOjE3MzY3ODkzMDd9.ARIGlhjr_yoCfC5TlQbRaSgf8QHwqj2s3K3LyZ-hYRM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/customer",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJwZWxhbmdnYW4tMTAiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MzczNTI1MTUsImV4cCI6MTczNzM5NTcxNX0.Cta-QGmuFB15okWFAPIuBRsmyu1P3jHVSw3wrCGBciw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/customer/me",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customer",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2NzQ2MTA3LCJleHAiOjE3MzY3ODkzMDd9.ARIGlhjr_yoCfC5TlQbRaSgf8QHwqj2s3K3LyZ-hYRM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"pelanggan-10\", /* optional */\n    \"password\":\"pelanggan-10\", /* optional */\n    \"nik\":\"12345678\", /* optional */\n    \"name\":\"Pelanggan Sepuluh\", /* optional */\n    \"address\":\"Milan 111, Italia\", /* optional */\n    \"phone\":\"021 34343-232\" /* optional */\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/customer/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "self update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJwZWxhbmdnYW4tMjkiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MzY3NDcxNjgsImV4cCI6MTczNjc5MDM2OH0.tCE4Si7YOi4KlgIJUOVhIkFH_As9MylE_P6Ixm12bNk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"address\":\"Roma Italia\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/customer/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2NzQ2MTA3LCJleHAiOjE3MzY3ODkzMDd9.ARIGlhjr_yoCfC5TlQbRaSgf8QHwqj2s3K3LyZ-hYRM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/customer/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customer",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API folder ini berisi untuk manajemen data pelanggan pada project Tiket Kereta Api."
+		},
+		{
+			"name": "KARYAWAN",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"karyawan-2\",\n    \"password\":\"karyawan-2\",\n    \"nik\":\"891892891\",\n    \"name\":\"Karyawan Dua\",\n    \"address\":\"River Side 301, Oman\",\n    \"phone\":\"031 9042842492\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/employee",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM3MzUzODE5LCJleHAiOjE3MzczOTcwMTl9.e9kqxLRAq-n4ZV1rKGd2TOQzr1s6qnzatS-_4FPTUBs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/employee/me",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2NzU0OTMzLCJleHAiOjE3MzY3OTgxMzN9.MAPxvJ0yj3_4mENQEAFY1YLg982MFpaUnAFxYPZxElg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"karyawan-2\", /* optional */\n    \"password\":\"karyawan-2\", /* optional */\n    \"nik\":\"891892891\", /* optional */\n    \"name\":\"Karyawan Dua\", /* optional */\n    \"address\":\"River Side 301, Oman\", /* optional */\n    \"phone\":\"031 9042842492\" /* optional */\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2NzU0OTMzLCJleHAiOjE3MzY3OTgxMzN9.MAPxvJ0yj3_4mENQEAFY1YLg982MFpaUnAFxYPZxElg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\":\"08982938291\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee/3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API folder ini berisi untuk manajemen data karyawan atau petugas pada project Tiket Kereta Api."
+		},
+		{
+			"name": "KERETA",
+			"item": [
+				{
+					"name": "GERBONG",
+					"item": [
+						{
+							"name": "KURSI/SEAT",
+							"item": [
+								{
+									"name": "tambah kursi",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "APP-KEY",
+												"value": "{{APP_KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"wagon_id\":3,\n    \"seat_number\":\"A11\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/train/wagon/seat",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"train",
+												"wagon",
+												"seat"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "tambah banyak kursi",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "APP-KEY",
+												"value": "{{APP_KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"wagon_id\": 3,\n    \"seat_number\":[\"A12\",\"A13\",\"A14\"]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/train/wagon/seats",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"train",
+												"wagon",
+												"seats"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update kursi",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "APP-KEY",
+												"value": "{{APP_KEY}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"seat_number\":\"A41\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/train/wagon/seat/4",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"train",
+												"wagon",
+												"seat",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete kursi",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "APP-KEY",
+												"value": "{{APP_KEY}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{BASE_URL}}/train/wagon/seat/4",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"train",
+												"wagon",
+												"seat",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "API folder ini berisi untuk manajemen data seat pada project Tiket Kereta Api."
+						},
+						{
+							"name": "tambah gerbong",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "APP-KEY",
+										"value": "{{APP_KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Gerbong 2\",\n    \"seat_count\":10,\n    \"train_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/train/wagon",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"train",
+										"wagon"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tambah banyak gerbong",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "APP-KEY",
+										"value": "{{APP_KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"train_id\": 1,\n    \"wagons\":[\n        {\n            \"name\":\"Gerbong A\",\n            \"seat_count\":30\n        },\n        {\n            \"name\":\"Gerbong B\",\n            \"seat_count\":35\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/train/wagons",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"train",
+										"wagons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update gerbong",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "APP-KEY",
+										"value": "{{APP_KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Gerbong 1\", /** optional */\n    \"seat_count\":10 /** optional */\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/train/wagon/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"train",
+										"wagon",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete gerbong",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "APP-KEY",
+										"value": "{{APP_KEY}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}/train/wagon/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"train",
+										"wagon",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "API folder ini berisi untuk manajemen data gerbong pada project Tiket Kereta Api."
+				},
+				{
+					"name": "tambah kereta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Kereta Test\",\n    \"descriptions\": \"Kerta Argo Lawu merupakan kereta listrik cepat yang ada di Jabodetabek\",\n    \"type\":\"eksekutif\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/train",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"train"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update kereta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Kereta Test\", /** optional */\n    \"descriptions\": \"Kerta Argo Lawu merupakan kereta listrik cepat yang ada di Jabodetabek\", /** optional */\n    \"type\":\"eksekutif\" /** optional */\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/train/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"train",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hapus kereta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/train/3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"train",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tampil kereta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/train",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"train"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tampil detail kereta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2ODIwNDg1LCJleHAiOjE3MzY4NjM2ODV9.0qj9ahyM5zOiNGO3_18DpGM5UFvsMd1cf2lSsh0pODg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/train/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"train",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API folder ini berisi untuk manajemen data kereta, gerbong, dan kursi atau petugas pada project Tiket Kereta Api."
+		},
+		{
+			"name": "JADWAL",
+			"item": [
+				{
+					"name": "create jadwal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"departured_location\": \"Medan\",\n    \"arrived_location\": \"Surabaya\",\n    \"departured_time\": \"2025-01-13 20:15:00\",\n    \"arrived_time\": \"2025-01-13 23:00:00\",\n    \"train_id\": 2,\n    \"price\": 300000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/schedule",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update jadwal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\":350000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/schedule/3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"schedule",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show jadwal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/schedule?departured_location=Medan&arrived_location=Surabaya",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"schedule"
+							],
+							"query": [
+								{
+									"key": "departured_location",
+									"value": "Medan",
+									"description": "optional"
+								},
+								{
+									"key": "arrived_location",
+									"value": "Surabaya",
+									"description": "optional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show detail jadwal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/schedule/3",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"schedule",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "drop jadwal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/schedule/4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"schedule",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API folder ini berisi untuk manajemen data jadwal kereta pada project Tiket Kereta Api."
+		},
+		{
+			"name": "PEMBELIAN TIKET",
+			"item": [
+				{
+					"name": "tambah pembelian",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchase_date\":\"2024-01-15\",\n    \"customer_id\":4,\n    \"schedule_id\":3,\n    \"details\": [\n        {\n            \"passanger_id\":\"212131\", /** nik penumpang */\n            \"passanger_name\":\"John\",\n            \"seat_number\":\"A13\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/purchase",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pembelian",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchase_date\": \"2024-01-15\", /* optional */\n    \"customer_id\": 3, /* optional */\n    \"schedule_id\": 3, /* optional */\n    \"details\": [ /* optional */\n        {\n            \"passanger_id\": \"212131\", /** nik penumpang */\n            \"passanger_name\": \"John\", /** nama penumpang */\n            \"seat_number\": \"A13\" /* nomor kursi */\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "drop pembelian",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tambah pembelian by pelanggan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJwZWxhbmdnYW4tMjkiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MzY5MTIxNDIsImV4cCI6MTczNjk1NTM0Mn0.ZLce0VcfEwRd9F41OrkmCNCMIDiR9868-IJExXtubcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchase_date\":\"2024-01-15\",\n    \"schedule_id\":1,\n    \"details\": [\n        {\n            \"passanger_id\":\"3102\", /** nik penumpang */\n            \"passanger_name\":\"Whyna Agustin\",\n            \"seat_number\":\"A11\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/customer",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show pembelian",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/purchase",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2024-01-13",
+									"description": "optional",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2024-01-14",
+									"description": "optional",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show income",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/income",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"income"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show detail pembelian",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJrYXJ5YXdhbi0xIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzM2OTExNDUxLCJleHAiOjE3MzY5NTQ2NTF9.W328U7aUsfMu1AqhgVoUcsQZHsaKZG7JU6sLzg3CQAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show pembelian by pelanggan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJwZWxhbmdnYW4tMTAiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MzY5MjM1OTEsImV4cCI6MTczNjk2Njc5MX0.Y4j7PgIYv4wP-h4_B1dURVQd2Z4HGw4RVIUg2CPKQbY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/customer?start_date=2024-01-13&end_date=2024-01-19",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2024-01-13",
+									"description": "optional"
+								},
+								{
+									"key": "end_date",
+									"value": "2024-01-19",
+									"description": "optional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show detail pembelian by customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJwZWxhbmdnYW4tMTAiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MzY5MjM1OTEsImV4cCI6MTczNjk2Njc5MX0.Y4j7PgIYv4wP-h4_B1dURVQd2Z4HGw4RVIUg2CPKQbY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "APP-KEY",
+								"value": "{{APP_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/customer/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"customer",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API folder ini berisi untuk manajemen pembelian tiket kereta pada project Tiket Kereta Api."
+		},
+		{
+			"name": "Authentication",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "APP-KEY",
+						"value": "{{APP_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"karyawan-1\",\n    \"password\":\"karyawan-1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/auth",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
