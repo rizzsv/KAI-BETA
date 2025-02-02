@@ -1,6 +1,8 @@
 import { getServerCookie } from "@/helper/server-cookie";
 import { KeretaType } from "../../types";
 import axiosInstance from "@/helper/api";
+import Gerbong from "./Gerbong";
+import AddGerbong from "./addGerbong";
 
 const getDetailKereta = async (
   id_kereta: string
@@ -46,6 +48,21 @@ const DetailKeretaPage = async (myProp: props) => {
         <div>
           <h1 className="text-lg font-semibold">{datakereta.name}</h1>
           <p className="text-sm">{datakereta.descriptions}</p>
+
+          <h2 className="text-base font-medium">
+            Daftar Gerbong
+          </h2>
+
+          <AddGerbong />
+          
+          <div className="my-5">
+          {
+            datakereta.wagons.map((gerbong, index) => (
+              <Gerbong item={gerbong} key={`keyGerbong-${index}`}
+              />
+            ))
+          }
+          </div>
         </div>
       }
     </div>
