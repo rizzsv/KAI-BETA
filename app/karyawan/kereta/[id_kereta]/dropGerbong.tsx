@@ -1,15 +1,90 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { GerbongType } from "../../types";
+import { FormEvent, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import Modal from "@/components/Modal";
+import { getCookie } from "@/helper/client-cookie";
+import axiosInstance from "@/helper/api";
 
 type props = {
   item: GerbongType;
 };
 
 const DropGerbong = (myProp: props) => {
+  const [show, setShow] = useState<boolean>(false);
+  const router = useRouter();
+
+  const openModal = () => {
+    setShow(true);
+  };
+
+  const closeModal = () => {
+    setShow(false);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    try {
+      e.preventDefault();
+      const TOKEN = getCookie(`token`);
+      const url = `/train/wagon/${myProp.item.id}`;
+
+      //hit endpoint
+      const response: any = await axiosInstance.delete(url, {
+        headers: {
+          authorization: `Bearer ${TOKEN}`,
+        },
+      });
+
+      const message = response.data.message;
+
+      if (response.data.success == true) {
+        toast(`${message}`, {
+          containerId: `toastDelete-${myProp.item.id}`,
+          type: "success",
+          theme: "colored",
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+        });
+        setShow(false);
+        // reload page
+        setTimeout(() => router.refresh(), 1000);
+      } else {
+        toast(`${message}`, {
+          containerId: `toastDelete-${myProp.item.id}`,
+          type: "error",
+          theme: "colored",
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+        });
+      }
+    } catch (error) {
+      toast(`Something wrong`, {
+        containerId: `toastDelete-${myProp.item.id}`,
+        type: "error",
+        theme: "colored",
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
   return (
     <div>
+      <ToastContainer containerId={`toastDelete-${myProp.item.id}`} />
       <button
+        onClick={() => openModal()}
         type="button"
-        className="px-2 py-1 bg-red-600 hover:bg-red-500 text-white rounded-md"
+        className="px-2 py-1 rounded-md bg-red-600 hover:bg-red-500"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -26,6 +101,38 @@ const DropGerbong = (myProp: props) => {
           />
         </svg>
       </button>
+      <Modal isShow={show}>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="w-full p-3 rounded-t-lg">
+            <h1 className="font-semibold text-lg">Edit Data Kereta</h1>
+            <span className="text-sm text-slate-500">
+              Pastikan data yang diisi suda benar
+            </span>
+          </div>
+          <div className="w-full p-3">
+            Apakah Anda yakin ingin menghapus data kereta dengan nama{" "}
+            {myProp.item.name}?
+          </div>
+
+          {/* Modal footer */}
+          <div className="w-full p-3 rounded-b-lg flex items-center justify-end gap-2">
+            <button
+              type="button"
+              className="px-4 py-2 rounded-md bg-slate-700 hover:bg-slate-600"
+              onClick={() => closeModal()}
+            >
+              Close
+            </button>
+
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-md bg-sky-700 hover:bg-sky-600"
+            >
+              Ya, Deh
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };

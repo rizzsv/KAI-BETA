@@ -9,7 +9,7 @@ const getKereta = async () : Promise<KeretaType[]> => {
     // get token from cookie
     const TOKEN = await getServerCookie(`token`)
     const url = `/train`
-    const response : any = await axiosInstance
+    const response: any = await axiosInstance
     .get(url, {
         headers: {
             authorization: `Bearer ${TOKEN}`

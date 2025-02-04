@@ -20,13 +20,12 @@ const LoginPage = () => {
         password
       }
 
-      //hit endpoint
-      const respone: any = await axiosInstance.post(url, requestData)
+      const response: any = await axiosInstance.post(url, requestData)
 
-      if(respone.data.succes === false) {
-        toast(respone.data.message,
+      if(response.data.success === false) {
+        toast(response.data.message,
           {
-            containerId: `toastlogin`,
+            containerId: "toastLogin",
             type: "error",
             position: "top-right",
             autoClose: 5000,
@@ -36,17 +35,15 @@ const LoginPage = () => {
             draggable: true,
           }
         )
-      }else{
-        const token = respone.data.token
-        const role = respone.data.role
+      } else {
+        const token = response.data.token
+        const role = response.data.role
 
-        // store token in cookie
+        storeCookie("token", token)
 
-        storeCookie(`token`, token)
-
-        toast(respone.data.message,
+        toast(response.data.message,
           {
-            containerId: `toastLogin`,
+            containerId: "toastLogin",
             type: "success",
             position: "top-right",
             autoClose: 5000,
@@ -57,16 +54,16 @@ const LoginPage = () => {
           }
         )
 
-        if (role === `ADMIN`){
-          setTimeout(() => router.replace(`/karyawan/kereta`),1000)
+        if (role === "ADMIN"){
+          setTimeout(() => router.replace("/karyawan/kereta"), 1000)
         }
       }
     } catch (error) {
       console.log(error);
-
-      toast(`Something Wrong`, 
+      
+      toast("Something Wrong", 
         {
-          containerId: `toastLogin`,
+          containerId: "toastLogin",
           type: "error",
           position: "top-right",
           autoClose: 5000,
