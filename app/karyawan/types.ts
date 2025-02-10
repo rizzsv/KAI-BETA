@@ -26,5 +26,30 @@ export interface KeretaType {
     createdAt: string
     updatedAt: string
   }
+
+  export interface EmployeeType {
+    id: number
+    nik: string
+    name: string
+    address: string
+    phone: string
+    user_id: number
+    app_user_token: string
+    createdAt: string
+    updatedAt: string
+    user_details: UserDetails
+  }
+
+  export interface UserDetails {
+    id: number
+    username: string
+    password: string
+    role: string
+    app_user_token: string
+    createdAt: string
+    updatedAt: string
+  }
+  
+  
   
   
