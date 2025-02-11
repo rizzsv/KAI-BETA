@@ -19,7 +19,7 @@ const getAllCustomer = async (): Promise<EmployeeType[]> => {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    
     if (response.data.success == true) {
       return response.data.data;
     }

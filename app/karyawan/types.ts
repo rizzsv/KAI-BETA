@@ -49,6 +49,20 @@ export interface KeretaType {
     createdAt: string
     updatedAt: string
   }
+
+  export interface ScheduleType {
+    id: number
+    departured_location: string
+    departured_time: string
+    arrived_location: string
+    arrived_time: string
+    train_id: number
+    price: number
+    app_user_token: string
+    createdAt: string
+    updatedAt: string
+    train_details: KeretaType
+  }
   
   
   

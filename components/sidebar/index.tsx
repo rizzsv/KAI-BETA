@@ -59,6 +59,13 @@ const Sidebar = ({ children }: Props) => {
             >
               Admin
             </Link>
+
+            <Link
+              href="/karyawan/jadwal"
+              className="w-full py-2 px-2 hover:bg-purple-600 font-medium duration-200 rounded"
+            >
+              Data Jadwal
+            </Link>
             <button
               onClick={handleLogout}
               className="w-full py-2 px-2 hover:bg-red-600 font-medium duration-200 rounded text-left bg-red-700"
