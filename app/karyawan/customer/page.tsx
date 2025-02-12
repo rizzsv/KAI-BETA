@@ -4,8 +4,8 @@ import { EmployeeType } from "../types";
 
 
 import Sidebar from "@/components/sidebar";
-import AddCustomer from "./addPelanggan";
-import CustomerData from "./pelanggan";
+import AddCustomer from "./addCustomer";
+import CustomerData from "./customer";
 import { getServerCookie } from "@/helper/server-cookie";
 
 

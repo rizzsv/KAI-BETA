@@ -54,8 +54,10 @@ const LoginPage = () => {
           }
         )
 
-        if (role === "ADMIN"){
-          setTimeout(() => router.replace("/karyawan/kereta"), 1000)
+        if (role === `ADMIN`){
+          setTimeout(() => router.replace(`/karyawan/kereta`), 1000)
+        } else if (role === `CUSTOMER`){
+          setTimeout(() => router.replace(`/pelanggan/jadwal`), 1000)
         }
       }
     } catch (error) {

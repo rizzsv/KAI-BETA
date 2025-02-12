@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import EditCustomer from "./editPelanggan"
-import DeleteCustomer from "./deletePelanggan"
+import EditCustomer from "./editCustomer"
+import DeleteCustomer from "./deleteCustomer"
 import ForgotPasswordCustomer from "./forgotPassword"
 
 

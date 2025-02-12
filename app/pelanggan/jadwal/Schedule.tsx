@@ -1,6 +1,6 @@
-import { KeretaType, ScheduleType } from "../types"
-import DeleteJadwal from "./deleteSchedule"
-import EditJadwal from "./editSchedule"
+import { KeretaType, ScheduleType } from "@/app/karyawan/types"
+import Link from "next/link"
+
 
 
 type props = {
@@ -83,10 +83,12 @@ const Jadwal = (myProps: props) => {
             <small className="text-sm text-blue-700 font-medium">
                 Opsi
             </small>
-            <div className="flex gap-2 items-center">
-                <EditJadwal jadwal={myProps.item} trains={myProps.trainData} />
-                <DeleteJadwal jadwalId={myProps.item.id} />
-            </div>
+            <Link href={`/pelanggan/pesan/${myProps.item.id}`}>
+            <button type="button" 
+            className="px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-600 text-white">
+                pesan
+            </button>
+            </Link>
         </div>
         </div>
     )
