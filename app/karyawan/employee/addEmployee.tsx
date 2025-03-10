@@ -43,6 +43,7 @@ const AddAdmin = () => {
         password,
       };
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const response: any = await axiosInstance.post("/employee/register", request, {
         headers: {
           Authorization: `Bearer ${cookie}`,

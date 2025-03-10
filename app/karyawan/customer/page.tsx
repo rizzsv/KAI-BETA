@@ -1,4 +1,4 @@
-
+export const dynamic = "force-dynamic";
 import axiosInstance from "@/helper/api";
 import { EmployeeType } from "../types";
 

@@ -24,6 +24,7 @@ const DeleteJadwal = ({ jadwalId }: props) => {
 
     try {
       const cookie = getCookie("token");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const response: any = await axiosInstance.delete(
         `/schedule/${jadwalId}`,
         {

@@ -1,11 +1,10 @@
-import { KeretaType, ScheduleType } from "@/app/karyawan/types"
+import { ScheduleType } from "@/app/karyawan/types"
 import Link from "next/link"
 
 
 
 type props = {
     item: ScheduleType,
-    trainData: KeretaType[]
 }
 
 const showTime = (date: string) => {
@@ -83,7 +82,7 @@ const Jadwal = (myProps: props) => {
             <small className="text-sm text-blue-700 font-medium">
                 Opsi
             </small>
-            <Link href={`/pelanggan/pesan/${myProps.item.id}`}>
+            <Link href={`/pelanggan/jadwal/${myProps.item.id}`}>
             <button type="button" 
             className="px-4 py-2 rounded-md bg-orange-500 hover:bg-orange-600 text-white">
                 pesan

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import axiosInstance from "@/helper/api";
 import { KeretaType } from "../types";
 import { getServerCookie } from "@/helper/server-cookie";
@@ -9,6 +10,7 @@ const getKereta = async () : Promise<KeretaType[]> => {
     // get token from cookie
     const TOKEN = await getServerCookie(`token`)
     const url = `/train`
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response: any = await axiosInstance
     .get(url, {
         headers: {

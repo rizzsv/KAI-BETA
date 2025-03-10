@@ -1,4 +1,4 @@
-
+export const dynamic = "force-dynamic";
 import { EmployeeType } from "../types";
 import axiosInstance from "@/helper/api";
 import EmployeeData from "./employee";
@@ -10,6 +10,7 @@ const getAllAdmin = async (): Promise<EmployeeType[]> => {
     const token = await getServerCookie("token");
     console.log(token);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response: any = await axiosInstance.get("/employee", {
       headers: {
         Authorization: `Bearer ${token}`,

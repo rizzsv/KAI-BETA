@@ -1,5 +1,5 @@
 "use client"
-
+export const dynamic = "force-dynamic";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import axiosInstance from "../helper/api";
@@ -20,6 +20,7 @@ const LoginPage = () => {
         password
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const response: any = await axiosInstance.post(url, requestData)
 
       if(response.data.success === false) {

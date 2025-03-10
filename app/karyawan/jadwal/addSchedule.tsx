@@ -53,6 +53,7 @@ const AddSchedule = (myProp: props) => {
                 train_id: trainId
             }
             const TOKEN = getCookie("token")
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const response: any = await axiosInstance.post(url, requestData, {
                 headers: { authorization: `Bearer ${TOKEN}` }
             })

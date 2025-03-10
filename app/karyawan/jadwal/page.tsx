@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import axiosInstance from "@/helper/api";
 import { KeretaType, ScheduleType } from "../types";
 import AddJadwal from "./addSchedule";
@@ -10,6 +11,7 @@ const getJadwal = async (): Promise<ScheduleType[]> => {
     const url = `/schedule`;
     const TOKEN = await getServerCookie(`token`);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response: any = await axiosInstance.get(url, {
       headers: { authorization: `Bearer ${TOKEN}` },
     });
@@ -31,6 +33,7 @@ const getKereta = async (): Promise<KeretaType[]> => {
       const TOKEN = await getServerCookie("token")
       const url = `/train`
       /** hit endpoint */
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const response: any = await axiosInstance
           .get(url, {
               headers: {
